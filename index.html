@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <!--[if IE]><![endif]-->
+    <!--[if lt IE 7 ]> <html class="ie ie6">    <![endif]-->
+    <!--[if IE 7 ]>    <html class="ie ie7">    <![endif]-->
+    <!--[if IE 8 ]>    <html class="ie ie8">    <![endif]-->
+    <!--[if IE 9 ]>    <html class="ie ie9">    <![endif]-->
+    <!--[if (gt IE 9)|!(IE)]><!--><html><!--<![endif]-->
+   
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Home Booker</title>
+        
+        <link rel="stylesheet" href="css/html5-doctor-reset-stylesheet.min.css" type="text/css">        
+        <link rel="stylesheet" href="css/media-queries.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css" type="text/css">        
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        
+        <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="js/knockout-2.1.0.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.9.1.custom.min.js"></script>
+        <script type="text/javascript" src="js/customScrollBarMobile.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        <script type="text/javascript" src="js/scripts.js"></script>
+    </head>
+    <body>
+        <div id="charges-details">
+            <table class="charge">
+                <thead>
+                    <tr>
+                        <td class="charges-td">Расход</td>
+                        <td class="charges-td">Сумма (грн)</td>
+                        <td class="charges-td">Дата</td>
+                    </tr>
+                </thead>
+                
+                <tbody data-bind="foreach: charges, afterAdd: recalculateCommonCost">
+                    <tr>
+                        <td class="charges-td" data-bind="text: type">Расход</td>
+                        <td class="charges-td" data-bind="text: count">Сумма</td>
+                        <td class="charges-td" data-bind="text: date">Дата</td>
+                    </tr>
+                </tbody>   
+            </table>
+        </div>
+        
+        <div id="charges-common">
+            <table class="charge">
+                <thead>
+                    <tr>
+                        <td class="charges-td">Тип расходов</td>
+                        <td class="charges-td">Общая Сумма (грн)</td>
+                    </tr>
+                </thead>
+                
+                <tbody data-bind="foreach: charges-common">
+                    <tr>
+                        <td class="charges-td" data-bind="text: type">Расход</td>
+                        <td class="charges-td" data-bind="text: count">Сумма</td>
+                    </tr>
+                </tbody>   
+            </table>
+        </div>
+        
+        <div id="new-charge">
+            <ul>
+                <li>
+                    <span>Тип расходов: </span>
+                    <select id="selectCharge" data-bind="options: chargeOptions, optionsText: 'text', optionsValue: 'value', optionsCaption:'Select a type...', value: type">
+                    </select>
+                </li>
+                <li>
+                    <span>Сумма: </span><input type="text" data-bind="value: cost" />
+                </li>
+            </ul>
+            <button id="add-charge" data-bind="click: addCharge">Добавить расход</button>
+        </div>
+    </body>
+</html>
