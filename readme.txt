@@ -1,0 +1,1 @@
+Simple home accounting application. Totally client-side based version.
