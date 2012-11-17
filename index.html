@@ -45,7 +45,7 @@
             </table>
         </div>
         
-        <div id="charges-common">
+        <div id="totals">
             <table class="charge">
                 <thead>
                     <tr>
@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 
-                <tbody data-bind="foreach: charges-common">
+                <tbody data-bind="foreach: charges">
                     <tr>
                         <td class="charges-td" data-bind="text: type">Расход</td>
                         <td class="charges-td" data-bind="text: count">Сумма</td>
@@ -67,7 +67,7 @@
             <ul>
                 <li>
                     <span>Тип расходов: </span>
-                    <select id="selectCharge" data-bind="options: chargeOptions, optionsText: 'text', optionsValue: 'value', optionsCaption:'Select a type...', value: type">
+                    <select id="selectCharge" data-bind="options: chargeList, optionsText: 'text', optionsValue: 'value', optionsCaption:'Select a type...', value: type">
                     </select>
                 </li>
                 <li>

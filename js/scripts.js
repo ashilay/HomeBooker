@@ -22,7 +22,7 @@
             self.cost = ko.observable('');
             self.type = ko.observable('');
             
-            self.chargeOptions = ko.observableArray ([
+            self.chargeList = ko.observableArray ([
                 {"text": "товары для дома", value: "товары для дома"},
                 {"text": "продукты", value: "продукты"},
                 {"text": "отдых", value: "отдых"},
