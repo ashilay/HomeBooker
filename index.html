@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 
-                <tbody data-bind="foreach: charges, afterAdd: recalculateCommonCost">
+                <tbody data-bind="foreach: charges">
                     <tr>
                         <td class="charges-td" data-bind="text: type">Расход</td>
                         <td class="charges-td" data-bind="text: count">Сумма</td>
@@ -54,10 +54,10 @@
                     </tr>
                 </thead>
                 
-                <tbody data-bind="foreach: charges">
+                <tbody data-bind="foreach: chargeList">
                     <tr>
-                        <td class="charges-td" data-bind="text: type">Расход</td>
-                        <td class="charges-td" data-bind="text: count">Сумма</td>
+                        <td class="charges-td" data-bind="text: text">Расход</td>
+                        <td class="charges-td cost" data-bind="totalCost: text">Сумма</td>
                     </tr>
                 </tbody>   
             </table>

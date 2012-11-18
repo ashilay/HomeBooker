@@ -35,17 +35,30 @@
                 self.charges.push(newCharge);
             };
             
-            self.recalculateCommonCost = function () {
-                ko.utils.arrayForEach(self.chargeOptions(), function (item) {
-                    var type = item.text,
-                        common;
-                    
-                });
+            // custom binding - calculate total cost per charge type
+            ko.bindingHandlers.totalCost = {
+                update: function (element, valueAccessor) {
+                    debugger;
+                    var total = 0;
+                    var type = typeof valueAccessor == 'function' ? valueAccessor() : valueAccessor;
+                    ko.utils.arrayForEach(self.charges, function(item) {
+                        if (item.type == type) {
+                            total += item.cost;
+                        }
+                    })
+                    $(element).text(total);                    
+                }
             };
+            //
     }
     
-    ko.applyBindings(new viewModel());        
+    var vm = new viewModel();
+    ko.applyBindings(vm);        
     
+    function updateCalc() {
+        var id = $('#totals')[0];
+        ko.applyBindings(vm, id);
+    }
     
     function Charge (type, count) {
         this.type = type;
