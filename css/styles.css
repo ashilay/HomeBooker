@@ -4,16 +4,44 @@ html {
     
 }
 body {
+    background: #82B64A;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
+#container {
+    background: #D6620F;
+    border-radius: 20px;
+    width: 960px;
+    margin: 0 auto;
+    height: 800px;
+    overflow: hidden;
+    font-family: Calibri;
+    
+}
+
+/*   TABS  */
+
+#tabs {
+    border-radius: 5px; 
+    margin: 20px;
+    height: 530px;
+    font-family: Calibri;
+}
+
+.tabs-labels {
+    background: #FC0;
+}
+
+.tabs-labels a {
+    outline: none;
+}
+
 
 /*   CHARGES  */
 #charges-details {
-    background-color: #ccc;
-    width: 800px;
+    color: #fff;
 }
 
 #totals {
@@ -24,8 +52,56 @@ body {
 .charges-td {
     text-align: center;
     width: 33%;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.charges-tr {
+    background: #82B64A;
+    border: 5px solid #fff;
+    border-left: 0px;
+    border-right: 0px;
+    margin: 10px 0px;
+    font-size: 15px;
 }
 
 .charge {
     width: 100%;
+}
+
+#new-charge {
+    float: left;
+    margin-left: 20px;
+}
+
+#short-info {
+    float: right;
+    margin-right: 20px;
+}
+
+.table-header {
+    background: #32bfdd;
+}
+
+.table-header td {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.side-block {
+    background: #fff;
+    border-radius: 5px; 
+    height: 200px;
+    width: 450px;
+}
+
+/*   progress bar  */
+#progressbar {
+    margin: 0 auto;
+    height: 30px;
+    width: 90%;
+}
+
+.ui-widget-header {
+    background-color: #82B64A;
 }
