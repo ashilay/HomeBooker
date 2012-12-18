@@ -5,6 +5,13 @@
 
 (function(hb, window, $) {  
     
+    hb.updateProgressBar = function() {
+        $( "#progressbar" ).progressbar({
+            value: hb.vm.calcProgressBarVal()
+        });
+    };
+        
+        
     $(window).load(function() {
         
         // init tabs
@@ -13,17 +20,6 @@
         })();
         
         //init progress bar
-        
-        
-        hb.updateProgressBar = function() {
-            console.log(0);
-            console.log(hb);
-            console.log(hb.vm.calcProgressBarVal());
-            $( "#progressbar" ).progressbar({
-                value: hb.vm.calcProgressBarVal()
-            });
-        };
-        
         hb.updateProgressBar();
     
     });

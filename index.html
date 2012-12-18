@@ -37,7 +37,7 @@
                 </ul>
 
                 <div id="tabs-1">
-                    <div id="charges-details">
+                    <div id="charges-details" class="scrollableContent">
                         <table class="charge">
                             <thead>
                                 <tr class="table-header">
@@ -47,8 +47,8 @@
                                 </tr>
                             </thead>
 
-                            <tbody data-bind="foreach: charges">
-                                <tr class="charges-tr">
+                            <tbody data-bind="foreach: charges" id="charge-rows">
+                                <tr class="charges-tr" data-bind="attr:{title: descr}">
                                     <td class="charges-td" data-bind="text: type">Расход</td>
                                     <td class="charges-td" data-bind="text: count">Сумма</td>
                                     <td class="charges-td" data-bind="text: date">Дата</td>
@@ -62,7 +62,7 @@
                     <div id="totals">
                         <table class="charge">
                             <thead>
-                                <tr>
+                                <tr class="table-header">
                                     <td class="charges-td">Тип расходов</td>
                                     <td class="charges-td">Общая Сумма (грн)</td>
                                 </tr>
@@ -71,13 +71,13 @@
                             <tbody id="t">
 
                                 <!-- ko foreach: chargeList -->
-                                <tr>
+                                <tr class="charges-tr">
                                     <td class="charges-td" data-bind="text: text">Расход</td>
                                     <td class="charges-td cost" data-bind="totalCostPerType: text">Сумма</td>
                                 </tr>
                                 <!-- /ko -->
 
-                                <tr>
+                                <tr class="grand-total">
                                     <td class="charges-td">Общая сумма</td>
                                     <td class="charges-td cost" data-bind="text: grandTotal">0</td>
                                 </tr>
@@ -88,14 +88,16 @@
                 </div><!-- id="tabs-2" --> 
                 
                 <div id="tabs-3">
-                    <div>
-                        <span>Тратить в месяц: </span><input type="text" data-bind="value: chargePerMonth"/>
-                        <button data-bind="click: setChargePerMonth">Применить</button>
-                    </div>
-                    
-                    <div>
-                        <span>Новый тип расходов: </span><input type="text" data-bind="value: newChargeType"/>
-                        <button data-bind="click: addNewChargeType">Добавить</button>
+                    <div class="middleFont">
+                        <div>
+                            <span>Тратить в месяц: </span><input type="text" data-bind="value: chargePerMonth"/>
+                            <button data-bind="click: setChargePerMonth">Применить</button>
+                        </div>
+
+                        <div>
+                            <span>Новый тип расходов: </span><input type="text" data-bind="value: newChargeType"/>
+                            <button data-bind="click: addNewChargeType">Добавить</button>
+                        </div>
                     </div>
                 </div>
 
@@ -103,27 +105,29 @@
         
 
             <div id="new-charge" class="side-block">
-                <div>
+                <div class="side-block-row">
                     <span>Тип расходов: </span>
                     <select id="selectCharge" data-bind="options: chargeList, optionsText: 'text', optionsValue: 'value', optionsCaption:'Select a type...', value: type">
                     </select>
                 </div>
-                <div>
+                <div class="side-block-row">
                     <span>Сумма: </span><input type="text" data-bind="value: cost"/>
                 </div>
-                <button id="add-charge" data-bind="click: addCharge">Добавить расход</button>
+                <div class="side-block-row">
+                    <span>Подробнее: </span><input id="charge-desc" type="text"  data-bind="value: chargeDescr"/>
+                </div>
+                <button id="add-charge" class="side-block-row" data-bind="click: addCharge">Добавить расход</button>
             </div>
             
             <div id="short-info" class="side-block">
-                <ul>
-                    <li><span>Тратить в месяц: </span><span data-bind="text: chargePerMonth"></span></li>
-                    <li><span>Потрачено в этом месяце: </span><span data-bind="text: grandTotal"></span></li>
-                    <li>
-                        <span>В процентах:</span>
+                    <div class="side-block-row"><span>Тратить в месяц: </span><span data-bind="text: chargePerMonth"></span></div>
+                    <div class="side-block-row"><span>Потрачено в этом месяце: </span><span data-bind="text: grandTotal"></span></div>
+                    <div class="side-block-row">
+                        <div class="fleft">В процентах:</div>                       
                         <div id="progressbar">            
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                    <div class="side-block-row cash-left"><span>Можно еще потратить: </span><span data-bind="text: cashLeft"></span></div>
             </div>
 
         
