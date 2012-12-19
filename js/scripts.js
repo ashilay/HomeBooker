@@ -1,12 +1,11 @@
 
 (function(hb, window, $) {  
     
-    
-        
         var storage = window.localStorage,
             isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/),
             scrollableContent,
-            parsedCharges;
+            parsedCharges,
+            currentMonth = moment(new Date()).format('MMM');
         
         function viewModel() {
             var self = this;
@@ -37,7 +36,6 @@
                     storage.chargeList = JSON.stringify(charges);
                     self.chargeList(charges);
                 } else {
-                    
                     // use existing charge types if already exist in storage
                     b = JSON.parse(storage.chargeList);
                     parsedCharges = b;
@@ -54,9 +52,9 @@
                 parsedCharges[parsedCharges.length] = newCh;
                 storage.chargeList = JSON.stringify(parsedCharges);
             };
-            //
             
-            // ger all charges from storage
+            
+            // get all charges from storage
             self.getCharges = function() {                   
                 if (!storage.charges) {
                     storage.charges = '[]';
@@ -64,7 +62,7 @@
                     self.charges(JSON.parse(storage.charges));
                 }
             };
-            //
+            
             
             // add new charge
             self.addCharge = function () { 
@@ -81,13 +79,18 @@
                 storageCharges[storageCharges.length] = newCharge;
                 storage.charges = JSON.stringify(storageCharges);
                 
-                self.updateGrandTotal();
-                
-                hb.updateProgressBar();
-                self.calcLeftCash();
+                self.updateCalcs();
                 updateScroll();
             };
-            //
+            
+            
+            // update calculations for total summ, left summ to charge, progress bar % value
+            self.updateCalcs = function() {
+                self.updateGrandTotal();
+                self.calcLeftCash();
+                hb.updateProgressBar();
+            }
+            
             
             // custom binding - calculate total cost per charge type
             ko.bindingHandlers.totalCostPerType = {
@@ -103,7 +106,7 @@
                     $(element).text(total);
                 }
             };
-            //
+            
             
             // update general summ for all types
             self.updateGrandTotal = function() {
@@ -119,7 +122,7 @@
                     
                 self.grandTotal(grTotal);
             };
-            //
+            
             
             // set planned charge summ for month
             self.setChargePerMonth = function() {
@@ -129,7 +132,7 @@
                 hb.updateProgressBar();
                 self.calcLeftCash();
             };
-            //
+            
             
             // get planned monthly charge from storage
             self.getMonthlyCost = function() {
@@ -137,21 +140,29 @@
                     self.chargePerMonth(storage.monthlyCost);
                 } 
             };
-            //
+            
             
             // calculate montly charge in % for progress bar
             self.calcProgressBarVal = ko.computed(function() {
                 var val = (self.grandTotal()/self.chargePerMonth())*100;
                 return val;
             });
-            //
+            
             
             // calculate left money to charge
             self.calcLeftCash = ko.computed(function() {
                 var val = self.chargePerMonth() - self.grandTotal();
                 self.cashLeft(val);
             });
-            //
+            
+            // check if charge was done during current month
+            self.isCurrentMonthCharge = function(el) {
+                if (el.month && el.month == currentMonth) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
     }
     
     //
@@ -173,6 +184,7 @@
         this.count = count;
         this.descr = descr;
         this.date = moment(new Date()).format('DD MMM YYYY : HH mm');
+        this.month = moment(new Date()).format('MMM');
     };
     
     function chargeType (type) {

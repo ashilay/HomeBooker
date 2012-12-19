@@ -19,7 +19,6 @@
         <script type="text/javascript" src="js/knockout-2.1.0.js"></script>
         <script type="text/javascript" src="js/knockout.validation.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
-        <script type="text/javascript" src="js/customScrollBarMobile.js"></script>
         <script type="text/javascript" src="js/jquery.mCustomScrollbar.min.js"></script>
         <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
@@ -48,11 +47,13 @@
                             </thead>
 
                             <tbody data-bind="foreach: charges" id="charge-rows">
+                                <!-- ko if:$root.isCurrentMonthCharge($data)-->
                                 <tr class="charges-tr" data-bind="attr:{title: descr}">
                                     <td class="charges-td" data-bind="text: type">Расход</td>
                                     <td class="charges-td" data-bind="text: count">Сумма</td>
                                     <td class="charges-td" data-bind="text: date">Дата</td>
                                 </tr>
+                                <!-- /ko -->
                             </tbody>   
                         </table>
                     </div>
