@@ -9,11 +9,22 @@
     hb.runTests = function() {
         console.log('test start');
         
+        module('basic examples');
+        
         test( "a basic test example", function() {
             console.log('test');
             var value = "hello";
             equal( value, "hell", "We expect value to be hello" );
         });
+        
+        test( "a basic test example 2", function() {
+            console.log('test');
+            var value = "_hello";
+            equal( value, "hello", "We expect value to be hello" );
+        });
+        
+        
+        module('charges');
         
         test( "add new charge", function() {
             var lengthBefore = hb.vm.charges().length;
