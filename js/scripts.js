@@ -163,6 +163,16 @@
                     return false;
                 }
             };
+            
+            // clear all charges from storage
+            self.clearAllCharges = function() {
+              if (storage.charges) {
+                  storage.charges = '[]';
+                  self.charges([]);
+                  
+                  updateScroll();
+              }
+            };
     }
     
     //
